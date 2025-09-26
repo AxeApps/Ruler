@@ -1,0 +1,12 @@
+name: Ruler
+version: ${project.version}
+load: STARTUP
+api-version: 1.21.7
+description: A simple plugin to rule them all.
+website: "https://modrinth.com/plugin/axe-ruler"
+
+authors:
+  - vtr0_o
+
+main: com.Axe.Ruler.Main
+bootstrapper: com.Axe.Ruler.Bootstrapper

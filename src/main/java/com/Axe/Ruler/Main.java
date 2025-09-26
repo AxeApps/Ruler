@@ -1,17 +1,36 @@
 package com.Axe.Ruler;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+import java.io.File;
+
+public class Main extends JavaPlugin {
+
+    private PlayerDatabase db;
+    private YamlConfiguration rulesConfig;
+    private MiniMessage mm = MiniMessage.miniMessage();
+
+    @Override
+    public void onEnable() {
+        this.db = new PlayerDatabase(getDataFolder());
+        loadRulesYaml();
+        getServer().getPluginManager().registerEvents(new RulesListener(db, rulesConfig, mm), this);
     }
+
+    @Override
+    public void onDisable() {
+        db.close();
+    }
+
+    private void loadRulesYaml() {
+        File file = new File(getDataFolder(), "rules.yml");
+        if (!file.exists()) {
+            saveResource("rules.yml", false);
+        }
+
+        rulesConfig = YamlConfiguration.loadConfiguration(file);
+    }
+
 }

@@ -1,0 +1,16 @@
+title: "<bold><color:#ffffff>Server Rules"
+
+disagree-message: "<red>You must accept the rules to play!"
+
+buttons:
+  accept:
+    text: "<green>I accept the rules"
+    tooltip: "Click to agree to follow the server rules."
+  disagree:
+    text: "<red>I do not accept"
+    tooltip: "Clicking this will prevent you from joining the server."
+
+rules:
+  - "<green>No hacking or cheating"
+  - "<yellow>No griefing or destroying builds"
+  - "<aqua>Be respectful to all players"
